@@ -1,0 +1,13 @@
+
+.content {
+    grid-area: profile;
+    background-color: aqua;
+}
+.imgContent1 {
+    width: 100%;
+}
+
+.imgContent2 {
+    width: 256px;
+}
+
