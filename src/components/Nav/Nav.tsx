@@ -1,24 +1,27 @@
 import React from 'react';
 import '../../App.css';
 import style from './Nav.module.css';
+import {NavLink} from "react-router-dom";
+
 
 function Nav () {
+
     return (
         <div className={style.nav}>
             <div>
-                <a href={'google.com'}>Profile</a>
+                <NavLink to={'/profile'} >Profile</NavLink>
             </div>
             <div>
-                <a href={'google.com'}>Messages</a>
+                <NavLink to={'/dialogs'} >Messages</NavLink>
             </div>
             <div>
-                <a href={'google.com'}>News</a>
+                <NavLink to={'/news'} >News</NavLink>
             </div>
             <div>
-                <a href={'google.com'}>Music</a>
+                <NavLink to={'/music'} >Music</NavLink>
             </div>
             <div>
-                <a href={'google.com'}>Settings</a>
+                <NavLink to={'/settings'} >Settings</NavLink>
             </div>
         </div>
     );

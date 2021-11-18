@@ -11,3 +11,22 @@
     grid-template-columns: 2fr 10fr;
     /*grid-gap: 10px;*/
 }
+
+.content {
+    grid-area: profile;
+    background-color: aqua;
+}
+.imgContent1 {
+    width: 100%;
+}
+
+.imgContent2 {
+    width: 256px;
+}
+
+a {
+    color: white;
+}
+.active {
+    color: #080850;
+}
