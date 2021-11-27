@@ -1,14 +1,11 @@
 .dialogs {
 display: grid;
     grid-template-columns: 2fr 10fr;
+    background-color: aqua;
 }
 
 .dialogsItems {
     padding: 10px;
-}
-
-.dialogsItems a.dialog {
-    color: #89891b;
 }
 
 .messages {
@@ -21,4 +18,8 @@ display: grid;
 
 a {
     text-decoration: none;
+}
+
+.dialog {
+    color: black;
 }

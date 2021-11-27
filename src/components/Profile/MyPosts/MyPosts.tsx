@@ -1,9 +1,17 @@
 import React from 'react';
 import style from './MyPosts.module.css'
 import Posts from "./Post/Posts";
+import {PostType} from "../../../redux/state";
+
+export type MyPostsType = {
+    posts : Array<PostType>
+}
+
+function MyPosts (props: MyPostsType) {
+
+    const postsElements = props.posts.map( p => <Posts message={p.message} id={p.id} likesCount={p.likesCount}/>)
 
 
-function MyPosts () {
     return (
         <div>
             <div className={style.post}>
@@ -13,8 +21,7 @@ function MyPosts () {
                     <button>Add post</button>
                 </div>
             </div>
-            <Posts message={'Hello'} id={1} LikesCount={1}/>
-            <Posts message={'Hi'} id={2} LikesCount={1}/>
+            {postsElements}
         </div>
     );
 }

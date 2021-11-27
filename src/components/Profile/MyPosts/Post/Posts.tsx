@@ -1,15 +1,9 @@
 import React from 'react';
 import style from './Posts.module.css'
+import {PostType} from "../../../../redux/state";
 
 
-
-type PropsType = {
-    message : string;
-    id : number;
-    LikesCount : number;
-};
-
-function Posts (props: PropsType)  {
+function Posts (props: PostType)  {
     return (
         <div>
             <div>
@@ -17,7 +11,7 @@ function Posts (props: PropsType)  {
                 {props.message}
             </div>
             <div>
-                <span>Likes {props.LikesCount}</span>
+                <span>Likes {props.likesCount}</span>
             </div>
         </div>
     );
