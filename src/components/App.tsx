@@ -9,10 +9,12 @@ import News from "./News/News";
 import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
 
-import {StateType} from "../redux/state";
+import {newPostText, StateType} from "../redux/state";
 
 type AppType = {
     state: StateType,
+    addPost: ()=> void
+    newPostText: (text: string) => void
 }
 
 function App(props : AppType) {
@@ -24,12 +26,12 @@ function App(props : AppType) {
                 <Nav/>
                     <Routes>
                         <Route path={'/dialogs'} element={<Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
-                        <Route path={'/profile'} element={<Profile posts={props.state.profilePage.posts}/>}/>
+                        <Route path={'/profile'} element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost} newPostText={props.newPostText} newText={props.state.profilePage.newPostText}/>}/>
                         <Route path={'/news'} element={<News/>}/>
                         <Route path={'/music'} element={<Music/>}/>
                         <Route path={'/settings'} element={<Settings/>}/>
                         <Route path={'/dialogs/*'} element={<Dialogs dialogs={props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
-                        <Route path={'/'} element={<Profile posts={props.state.profilePage.posts}/>}/>
+                        <Route path={'/'} element={<Profile posts={props.state.profilePage.posts} addPost={props.addPost}  newPostText={props.newPostText} newText={props.state.profilePage.newPostText}/>}/>
                     </Routes>
                 </div>
         </BrowserRouter>);

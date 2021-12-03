@@ -1,3 +1,6 @@
+
+
+
 export type MessageType = {
     id : number,
     message : string,
@@ -13,6 +16,7 @@ export type PostType = {
 }
 export type ProfilePageType = {
     posts : Array<PostType>,
+    newPostText : string
 }
 export type DialogsPageType = {
     messages : Array<MessageType>,
@@ -32,7 +36,8 @@ export const state: StateType = {
             {id: 3, message: 'one', likesCount: 3 },
             {id: 4, message: 'two', likesCount: 6 },
             {id: 5, message: 'three', likesCount: 7 },
-        ],},
+        ],
+    newPostText: ''},
     dialogsPage : {
         messages : [
             {id:1, message : 'Hi'},
@@ -48,4 +53,30 @@ export const state: StateType = {
             {id:5, name: 'Andrey'},
         ],}
 
+}
+
+export const addPost = () => {
+    const newPost = {
+        id: 5,
+        message: state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    renderThree(state);
+
+}
+
+export const newPostText = (newText: string) => {
+    debugger;
+    state.profilePage.newPostText = newText;
+    renderThree(state);
+}
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+let renderThree: (state: StateType) => void = () => {};
+
+export const subscriber = (observe : (state: StateType) => void) => {
+    renderThree = observe;
 }
