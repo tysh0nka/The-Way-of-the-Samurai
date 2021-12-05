@@ -9,7 +9,7 @@ import News from "./News/News";
 import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
 
-import {newPostText, StateType} from "../redux/state";
+import {StateType} from "../redux/state";
 
 type AppType = {
     state: StateType,

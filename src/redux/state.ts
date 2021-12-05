@@ -73,8 +73,6 @@ export const newPostText = (newText: string) => {
     renderThree(state);
 }
 
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 let renderThree: (state: StateType) => void = () => {};
 
 export const subscriber = (observe : (state: StateType) => void) => {
