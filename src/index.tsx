@@ -3,21 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import {newPostText, state, StateType, subscriber} from "./redux/state";
-import {addPost} from "./redux/state";
+import {store} from "./redux/state";
 
-export const renderThree = (state: StateType) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <App state={state} addPost={addPost} newPostText={newPostText}/>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
+
+export const renderThree = () => {
+    ReactDOM.render(<App state={store.getState()} dispatch={store.dispatch.bind(store)}/>, document.getElementById('root'));
 }
 
-renderThree(state);
+renderThree();
 
-subscriber(renderThree);
+store.subscriber(renderThree);
 
 
 reportWebVitals();
