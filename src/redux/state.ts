@@ -18,6 +18,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     messages: Array<MessageType>,
     dialogs: Array<DialogType>,
+    newMessage: string
 }
 export type StateType = {
     profilePage: ProfilePageType,
@@ -38,7 +39,11 @@ type AddPostActionType = ReturnType<typeof AddActionCreate>
 
 type NewPostTextActionType = ReturnType<typeof NewPostTextActionCreate>
 
-export type ActionType = AddPostActionType|NewPostTextActionType
+type SendMessageActionType = ReturnType<typeof SendActionCreate>
+
+type NewMessageActionType = ReturnType<typeof NewMessageTextActionCreate>
+
+export type ActionType = AddPostActionType|NewPostTextActionType| SendMessageActionType| NewMessageActionType
 
 export const store: StorePropsType = {
     _state: {
@@ -66,6 +71,7 @@ export const store: StorePropsType = {
                 {id: 4, name: 'Oleg'},
                 {id: 5, name: 'Andrey'},
             ],
+            newMessage: '',
         }
 
     },
@@ -82,6 +88,17 @@ export const store: StorePropsType = {
             this._addPost()
         } else if (action.type === 'NEW-POST-TEXT') {
             this._newPostText(action.newText)
+        } else if (action.type === 'NEW-MESSAGE') {
+            this._state.dialogsPage.newMessage = action.newMessageText;
+            this.renderThree();
+        } else if (action.type === 'SEND-MESSAGE') {
+            const newMessage = {
+                id: 6,
+                message: this._state.dialogsPage.newMessage,
+            }
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newMessage = '';
+            this.renderThree();
         }
     },
     _addPost() {
@@ -109,3 +126,13 @@ export const NewPostTextActionCreate = (text: string) => {
     return {type: 'NEW-POST-TEXT',
         newText : text} as const
 }
+
+export const SendActionCreate = () => {
+    return {type: 'SEND-MESSAGE'} as const
+}
+
+export const NewMessageTextActionCreate = (text: string) => {
+    return {type: 'NEW-MESSAGE',
+        newMessageText : text} as const
+}
+

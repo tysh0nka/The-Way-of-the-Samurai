@@ -15,29 +15,32 @@ type AppType = {
     state: StateType,
     dispatch: (action: ActionType) => void
 }
-function App(props : AppType) {
+
+function App(props: AppType) {
 
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Nav/>
-                    <Routes>
-                        <Route path={'/dialogs '} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                                    messages={props.state.dialogsPage.messages}/>}/>
-                        <Route path={'/profile'} element={<Profile posts={props.state.profilePage.posts}
-                                                                   dispatch={props.dispatch}
-                                                                   newText={props.state.profilePage.newPostText}/>}/>
-                        <Route path={'/news'} element={<News/>}/>
-                        <Route path={'/music'} element={<Music/>}/>
-                        <Route path={'/settings'} element={<Settings/>}/>
-                        <Route path={'/dialogs/*'} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                                     messages={props.state.dialogsPage.messages}/>}/>
-                        <Route path={'/'} element={<Profile posts={props.state.profilePage.posts}
-                                                            dispatch={props.dispatch}
-                                                            newText={props.state.profilePage.newPostText}/>}/>
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route path={'/dialogs '} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
+                                                                messages={props.state.dialogsPage.messages}
+                                                                dispatch={props.dispatch} newMessage={props.state.dialogsPage.newMessage}/>}/>
+                    <Route path={'/profile'} element={<Profile posts={props.state.profilePage.posts}
+                                                               dispatch={props.dispatch}
+                                                               newText={props.state.profilePage.newPostText}/>}/>
+                    <Route path={'/news'} element={<News/>}/>
+                    <Route path={'/music'} element={<Music/>}/>
+                    <Route path={'/settings'} element={<Settings/>}/>
+                    <Route path={'/dialogs/*'} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
+                                                                 messages={props.state.dialogsPage.messages}
+                                                                 dispatch={props.dispatch} newMessage={props.state.dialogsPage.newMessage}/>}/>
+                    <Route path={'/'} element={<Profile posts={props.state.profilePage.posts}
+                                                        dispatch={props.dispatch}
+                                                        newText={props.state.profilePage.newPostText}/>}/>
+                </Routes>
+            </div>
         </BrowserRouter>);
 }
 

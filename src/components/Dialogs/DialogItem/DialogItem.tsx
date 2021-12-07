@@ -7,7 +7,7 @@ import {DialogType} from "../../../redux/state";
 
 function DialogItem (props: DialogType) {
     return (
-        <div >
+        <div className={s.dialogsItems}>
             <NavLink to={'dialogs/' + props.id} className={({isActive})=> isActive ? s.dialog : ''} >{props.name}</NavLink>
         </div>
     )

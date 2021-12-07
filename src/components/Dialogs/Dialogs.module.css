@@ -1,19 +1,46 @@
 .dialogs {
-display: grid;
+    display: grid;
+    grid-template-areas: 'name message'
+                           ' name newMessage';
     grid-template-columns: 2fr 10fr;
-    background-color: aqua;
+    grid-template-rows: 600px 1fr;
+    background-color: darkturquoise;
 }
 
 .dialogsItems {
     padding: 10px;
+    grid-area: name;
+    border-right: black 1px solid;
+
 }
 
 .messages {
+    grid-area: message;
     padding: 10px;
+    display: inline;
+    min-height: 300px;
+    max-height: 400px;
+    margin: 0 20px;
+
 }
 
 .message {
 
+}
+.newMessage {
+    grid-area: newMessage;
+    margin: 0 20px;
+}
+
+.newMessage textarea {
+    width: 600px;
+    height: 40px;
+}
+
+.newMessage button {
+    width: 100px;
+    height: 40px;
+    padding-top: 0;
 }
 
 a {
@@ -21,5 +48,6 @@ a {
 }
 
 .dialog {
+
     color: black;
 }
