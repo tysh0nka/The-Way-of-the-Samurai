@@ -1,3 +1,6 @@
+import {AddPostActionType, NewPostTextActionType, profileReducer} from "./profileReducer";
+import {dialogsReducer, NewMessageActionType, SendMessageActionType} from "./dialogsReducer";
+
 export type MessageType = {
     id: number,
     message: string,
@@ -29,19 +32,9 @@ export type StorePropsType = {
     renderThree: () => void
     subscriber: (observe: () => void) => void
     getState: () => StateType
-    _addPost: () => void
-    _newPostText: (newText: string) => void
     dispatch: (action: ActionType) => void
 
 }
-
-type AddPostActionType = ReturnType<typeof AddActionCreate>
-
-type NewPostTextActionType = ReturnType<typeof NewPostTextActionCreate>
-
-type SendMessageActionType = ReturnType<typeof SendActionCreate>
-
-type NewMessageActionType = ReturnType<typeof NewMessageTextActionCreate>
 
 export type ActionType = AddPostActionType|NewPostTextActionType| SendMessageActionType| NewMessageActionType
 
@@ -84,55 +77,13 @@ export const store: StorePropsType = {
         this.renderThree = observe;
     },
     dispatch (action) {
-        if (action.type === 'ADD-POST'){
-            this._addPost()
-        } else if (action.type === 'NEW-POST-TEXT') {
-            this._newPostText(action.newText)
-        } else if (action.type === 'NEW-MESSAGE') {
-            this._state.dialogsPage.newMessage = action.newMessageText;
-            this.renderThree();
-        } else if (action.type === 'SEND-MESSAGE') {
-            const newMessage = {
-                id: 6,
-                message: this._state.dialogsPage.newMessage,
-            }
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessage = '';
-            this.renderThree();
-        }
-    },
-    _addPost() {
-        const newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this.renderThree();
-    },
-    _newPostText(newText: string) {
-        this._state.profilePage.newPostText = newText;
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this.renderThree();
     },
 
 }
 
-export const AddActionCreate = () => {
-  return {type: "ADD-POST"} as const
-}
 
-export const NewPostTextActionCreate = (text: string) => {
-    return {type: 'NEW-POST-TEXT',
-        newText : text} as const
-}
 
-export const SendActionCreate = () => {
-    return {type: 'SEND-MESSAGE'} as const
-}
-
-export const NewMessageTextActionCreate = (text: string) => {
-    return {type: 'NEW-MESSAGE',
-        newMessageText : text} as const
-}
 
