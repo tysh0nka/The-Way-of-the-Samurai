@@ -1,10 +1,24 @@
-import {ActionType, ProfilePageType} from "./state";
+export type PostType = {
+    id: number;
+    message: string;
+    likesCount: number;
+}
 
-export type AddPostActionType = ReturnType<typeof AddActionCreate>
+const initialState = {
+    posts: [
+        {id: 1, message: 'Hello', likesCount: 1},
+        {id: 2, message: 'Hi', likesCount: 5},
+        {id: 3, message: 'one', likesCount: 3},
+        {id: 4, message: 'two', likesCount: 6},
+        {id: 5, message: 'three', likesCount: 7},
+    ] as Array<PostType>,
+    newPostText: '' as string
+}
 
-export type NewPostTextActionType = ReturnType<typeof NewPostTextActionCreate>
+type InitialStateType = typeof initialState
 
-export const  profileReducer = (state: ProfilePageType, action: ActionType ) => {
+
+export const  profileReducer = (state: InitialStateType = initialState, action: ActionType ): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost = {
@@ -22,6 +36,10 @@ export const  profileReducer = (state: ProfilePageType, action: ActionType ) => 
     }
 }
 
+
+type AddPostActionType = ReturnType<typeof AddActionCreate>
+type NewPostTextActionType = ReturnType<typeof NewPostTextActionCreate>
+type ActionType = AddPostActionType | NewPostTextActionType
 export const AddActionCreate = () => {
     return {type: "ADD-POST"} as const
 }

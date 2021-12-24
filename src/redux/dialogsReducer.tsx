@@ -1,10 +1,33 @@
-import {ActionType, DialogsPageType} from "./state";
+export type MessageType = {
+    id: number,
+    message: string,
+}
+export type DialogType = {
+    name: string,
+    id: number,
+}
 
-export type SendMessageActionType = ReturnType<typeof SendActionCreate>
 
-export type NewMessageActionType = ReturnType<typeof NewMessageTextActionCreate>
+const initialState = {
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Yo'},
+        {id: 4, message: '!'},
+    ] as Array<MessageType>,
+    dialogs: [
+        {id: 1, name: 'Dim'},
+        {id: 2, name: 'Anton'},
+        {id: 3, name: 'Alex'},
+        {id: 4, name: 'Oleg'},
+        {id: 5, name: 'Andrey'},
+    ] as Array<DialogType>,
+    newMessage: '',
+}
 
-export const  dialogsReducer = (state: DialogsPageType, action: ActionType ) => {
+type InitialStateType = typeof initialState
+
+export const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case "NEW-MESSAGE":
             state.newMessage = action.newMessageText;
@@ -17,15 +40,24 @@ export const  dialogsReducer = (state: DialogsPageType, action: ActionType ) => 
             state.messages.push(newMessage);
             state.newMessage = '';
             return state
-        default: return state
+        default:
+            return state
     }
 }
+
+type SendMessageActionType = ReturnType<typeof SendActionCreate>
+
+type NewMessageActionType = ReturnType<typeof NewMessageTextActionCreate>
+
+type ActionType = SendMessageActionType | NewMessageActionType
 
 export const SendActionCreate = () => {
     return {type: 'SEND-MESSAGE'} as const
 }
 
 export const NewMessageTextActionCreate = (text: string) => {
-    return {type: 'NEW-MESSAGE',
-        newMessageText : text} as const
+    return {
+        type: 'NEW-MESSAGE',
+        newMessageText: text
+    } as const
 }

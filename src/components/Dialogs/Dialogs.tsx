@@ -2,28 +2,18 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionType, DialogType, MessageType} from "../../redux/state";
-import {NewMessageTextActionCreate, SendActionCreate} from "../../redux/dialogsReducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
-
-export type DialogsType = {
-    dialogs : Array<DialogType>,
-    messages : Array<MessageType>,
-    dispatch: (action: ActionType) => void
-    newMessage: string
-}
-
-function Dialogs (props : DialogsType) {
-
-    const dialogElements = props.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-    const messagesElements = props.messages.map( m => <Message id={m.id} message={m.message} />)
+function Dialogs (props : DialogsPropsType) {
+    const dialogElements = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    const messagesElements = props.dialogsPage.messages.map( m => <Message id={m.id} message={m.message} />)
 
     const newMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.currentTarget.value;
-        props.dispatch(NewMessageTextActionCreate(text))
+        props.newMessageText(text)
     }
     const sendMessage = () => {
-        props.dispatch(SendActionCreate())
+        props.sendMessage()
     }
     return (
         <div className={s.dialogs}>
@@ -34,7 +24,7 @@ function Dialogs (props : DialogsType) {
                 {messagesElements}
             </div>
             <div className={s.newMessage}>
-                <textarea value={props.newMessage} onChange={newMessageText}>New message</textarea>
+                <textarea value={props.dialogsPage.newMessage} onChange={newMessageText}>New message</textarea>
                 <button onClick={sendMessage}>Send</button>
             </div>
 
