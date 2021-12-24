@@ -31,3 +31,8 @@ a {
 .active {
     color: #141480;
 }
+
+.imgUsersAvatar {
+    width: 60px;
+    height: 60px;
+}
