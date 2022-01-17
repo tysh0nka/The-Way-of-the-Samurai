@@ -24,7 +24,7 @@ function Dialogs (props : DialogsPropsType) {
                 {messagesElements}
             </div>
             <div className={s.newMessage}>
-                <textarea value={props.dialogsPage.newMessage} onChange={newMessageText}>New message</textarea>
+                <textarea value={props.dialogsPage.newMessage} onChange={newMessageText} >New message</textarea>
                 <button onClick={sendMessage}>Send</button>
             </div>
 

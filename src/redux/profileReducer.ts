@@ -1,3 +1,26 @@
+export type ProfileType = {
+    "aboutMe": null| string,
+    "contacts": {
+        "facebook": null| string,
+        "website": null| string,
+        "vk": null| string,
+        "twitter": null| string,
+        "instagram": null| string,
+        "youtube": null| string,
+        "github": null| string,
+        "mainLink": null| string
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": null| string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": undefined| string,
+        "large": undefined| string
+    }
+}
+
+
 export type PostType = {
     id: number;
     message: string;
@@ -5,6 +28,7 @@ export type PostType = {
 }
 
 const initialState = {
+    profile: {} as ProfileType,
     posts: [
         {id: 1, message: 'Hello', likesCount: 1},
         {id: 2, message: 'Hi', likesCount: 5},
@@ -18,34 +42,47 @@ const initialState = {
 type InitialStateType = typeof initialState
 
 
-export const  profileReducer = (state: InitialStateType = initialState, action: ActionType ): InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case 'ADD-POST': {
             const newPost = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost);
-            state.newPostText = '';
+            let newState = {...state}
+            newState.posts = [...state.posts]
+            newState.posts.push(newPost);
+            newState.newPostText = '';
+            return newState
+        }
+        case 'NEW-POST-TEXT': {
+            let newState = {...state}
+            newState.newPostText = action.newText;
+            return newState
+        }
+        case "SET_USER_PROFILE": {
+            return {...state, profile: action.profile}
+        }
+        default:
             return state
-        case 'NEW-POST-TEXT':
-            state.newPostText = action.newText;
-            return state
-        default: return state
     }
 }
 
 
 type AddPostActionType = ReturnType<typeof AddActionCreate>
 type NewPostTextActionType = ReturnType<typeof NewPostTextActionCreate>
-type ActionType = AddPostActionType | NewPostTextActionType
+type SetUserProfileType = ReturnType<typeof setUserProfile>
+type ActionType = AddPostActionType | NewPostTextActionType | SetUserProfileType
 export const AddActionCreate = () => {
     return {type: "ADD-POST"} as const
 }
 
 export const NewPostTextActionCreate = (text: string) => {
-    return {type: 'NEW-POST-TEXT',
-        newText : text} as const
+    return {
+        type: 'NEW-POST-TEXT',
+        newText: text
+    } as const
 }
 
+export const setUserProfile = (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile}as const )

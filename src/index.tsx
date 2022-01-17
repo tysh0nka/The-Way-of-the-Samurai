@@ -12,14 +12,13 @@ import {Provider} from "react-redux";
 export const renderThree = () => {ReactDOM.render(
     <BrowserRouter>
        <Provider store={store}>
-           <App  />
+           <App/>
        </Provider>
     </BrowserRouter>,
     document.getElementById('root'));
 }
 
 renderThree();
-
 store.subscribe(renderThree);
 
 
