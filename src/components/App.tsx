@@ -12,12 +12,14 @@ import UsersContainer from "./Users/UsersContainer";
 import Nav from "./Nav/Nav";
 
 import ProfileContainer from "./Profile/ProfileInfo/ProfileContainer";
+import HeaderContainer from "./Header/HeaderContainer";
+import Login from "./Login/Login";
 
 
 function App() {
     return (
         <div className="App">
-            <Header/>
+            <HeaderContainer/>
             <Nav/>
             <Routes>
                 <Route path={'/dialogs '} element={<DialogsContainer/>}/>
@@ -28,6 +30,7 @@ function App() {
                 <Route path={'/dialogs/*'} element={<DialogsContainer/>}/>
                 <Route path={'/'} element={<ProfileContainer/>}/>
                 <Route path={'/users'} element={<UsersContainer/>}/>
+                <Route path={'/login'} element={<Login/>}/>
             </Routes>
         </div>);
 }

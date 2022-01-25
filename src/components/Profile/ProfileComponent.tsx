@@ -3,8 +3,8 @@ import Profile from "./Profile";
 import axios from "axios";
 import {ProfilePropsType} from "./ProfileInfo/ProfileContainer";
 import {useParams} from "react-router-dom";
-
-
+import {getProfile} from "../../redux/api/api";
+import {setUserProfileTC} from "../../redux/profileReducer";
 
 
 function ProfileComponent(props: ProfilePropsType) {
@@ -13,10 +13,9 @@ function ProfileComponent(props: ProfilePropsType) {
     const userId = params.id
 
     useEffect(() => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(r => {
-                setProfile(r.data)
-        })
+        debugger
+        props.setProfile(userId as string)
+        
     },[setProfile, userId])
 
         return (

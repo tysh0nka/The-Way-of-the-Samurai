@@ -1,3 +1,7 @@
+import profile from "../components/Profile/Profile";
+import {Dispatch} from "redux";
+import {getProfile} from "./api/api";
+
 export type ProfileType = {
     "aboutMe": null| string,
     "contacts": {
@@ -86,3 +90,11 @@ export const NewPostTextActionCreate = (text: string) => {
 }
 
 export const setUserProfile = (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile}as const )
+export const setUserProfileTC = (id: string) => {
+    return (dispatch: Dispatch) => {
+        debugger
+        getProfile(id as string).then(r => {
+            dispatch(setUserProfile(r.data))
+        })
+    }
+}

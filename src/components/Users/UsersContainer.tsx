@@ -2,12 +2,12 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
 import {
-    followAC,
+    followAC, followUsersTC, getUsersTC,
     setCountPageAC,
     setTotalCountAC,
     setUsersAC,
     toggleIsFetchingAC,
-    unFollowAC,
+    unFollowAC, UnfollowUsersTC,
     UsersType
 } from "../../redux/usersReducer";
 import UsersC from "./UsersApiComponent";
@@ -25,10 +25,10 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     follow: (userID: any) => void
     unFollow: (userID: any) => void
-    setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (value: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
+    getUsersTC: (currentPage: number, pageSize: number) => void
+    followUserTC: (id: number) => void
+    UnfollowUsersTC: (id: number) => void
 }
 export type UsersPropsType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -38,7 +38,7 @@ function mapStateToProps(state: AppStateType): MapStateToPropsType {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        ifFetching: state.usersPage.isFetching
+        ifFetching: state.usersPage.isFetching,
     }
 }
 
@@ -50,19 +50,21 @@ function mapDispatchToProps(dispatch: Dispatch): MapDispatchToPropsType {
         unFollow: (userID: any) => {
             dispatch(unFollowAC(userID))
         },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
         setCurrentPage: (value: number) => {
             dispatch(setCountPageAC(value))
         },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalCountAC(totalCount))
+        getUsersTC: (currentPage: number, pageSize: number) => {
+            // @ts-ignore
+            dispatch(getUsersTC(currentPage, pageSize))
         },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
+        followUserTC: (id: number) => {
+            // @ts-ignore
+            dispatch(followUsersTC(id))
+        },
+        UnfollowUsersTC: (id: number) => {
+            // @ts-ignore
+            dispatch(UnfollowUsersTC(id))
         }
-    }
-}
+}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersC);

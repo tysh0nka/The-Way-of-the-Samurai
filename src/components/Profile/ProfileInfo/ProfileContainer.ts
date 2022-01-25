@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import ProfileComponent from "../ProfileComponent";
 import {Dispatch} from "redux";
-import {ProfileType, setUserProfile} from "../../../redux/profileReducer";
+import {ProfileType, setUserProfile, setUserProfileTC} from "../../../redux/profileReducer";
 import {AppStateType} from "../../../redux/reduxStore";
 
 type MapStateToPropsType = {
@@ -9,7 +9,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    setProfile: (profile: ProfileType) => void
+    setProfile: (id: string) => void
 }
 export type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -21,8 +21,9 @@ function mapStateToProps (state: AppStateType): MapStateToPropsType {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        setProfile: (profile: ProfileType) => {
-            dispatch(setUserProfile(profile))
+        setProfile: (id: string) => {
+            // @ts-ignore
+            dispatch(setUserProfileTC(id))
         }
     }
 }

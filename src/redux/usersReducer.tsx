@@ -1,3 +1,5 @@
+import {followUsers, getUsers, UnfollowUsers} from "./api/api";
+import {Dispatch} from "redux";
 
 export type UsersType = {
     "name": string,
@@ -15,7 +17,7 @@ const initialState = {
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
 }
 type InitialStateType = typeof initialState
 
@@ -45,6 +47,7 @@ export type setUsersACType = ReturnType<typeof setUsersAC>
 export type setCountPageACType = ReturnType<typeof setCountPageAC>
 export type setTotalCountACType = ReturnType<typeof setTotalCountAC>
 export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+
 export type ActionsType = followACType|unFollowACType|setUsersACType| setCountPageACType | setTotalCountACType | toggleIsFetchingACType
 
 
@@ -57,4 +60,36 @@ export const setTotalCountAC = (totalCount: number) => ({type: "SET-TOTAL-COUNT"
 export const toggleIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
 
 
+export const getUsersTC = (currentPage: number,pageSize: number ) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetchingAC(true))
+        getUsers(currentPage, pageSize).then(data => {
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalCountAC(data.totalCount))
+            dispatch(toggleIsFetchingAC(false))
 
+        })
+    }
+}
+export const UnfollowUsersTC = (id: number) => {
+    return (dispatch: Dispatch) => {
+        UnfollowUsers(id).then(data => {
+            if (data.resultCode === 0) {
+               dispatch(unFollowAC(id))
+                dispatch(toggleIsFetchingAC(false))
+            }
+        })
+    }
+}
+
+export const followUsersTC = (id: number) => {
+    debugger
+return (dispatch: Dispatch) => {
+    followUsers(id).then(data => {
+        if (data.resultCode === 0) {
+            dispatch(followAC(id))
+
+        }
+    })
+}
+}
