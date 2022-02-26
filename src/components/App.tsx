@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import Header from "./Header/Header";
 
 import {Route, Routes} from "react-router-dom";
 import News from "./News/News";
@@ -11,12 +10,13 @@ import DialogsContainer from "./Dialogs/DialogsContainer";
 import UsersContainer from "./Users/UsersContainer";
 import Nav from "./Nav/Nav";
 
-import ProfileContainer from "./Profile/ProfileInfo/ProfileContainer";
+import ProfileContainer from "./Profile/ProfileContainer";
 import HeaderContainer from "./Header/HeaderContainer";
 import Login from "./Login/Login";
 
 
 function App() {
+
     return (
         <div className="App">
             <HeaderContainer/>

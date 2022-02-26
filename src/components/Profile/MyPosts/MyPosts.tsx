@@ -2,27 +2,21 @@ import React, {ChangeEvent} from 'react';
 import style from './MyPosts.module.css'
 import Posts from "./Post/Posts";
 import {MyPostPropsType} from "./MyPostsContainer";
+import {AddPostForm, AddPostFormType} from "./Post/AddPost";
 
 function MyPosts (props: MyPostPropsType) {
     const postsElements = props.profilePage.posts.map( p => <Posts message={p.message} id={p.id} likesCount={p.likesCount}/>)
 
-    const addPost = () => {
-        props.addPost()
+    const addPost = (values: AddPostFormType) => {
+        console.log(values)
+        props.addPost(values.addPostForm)
     }
 
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const text = e.currentTarget.value
-        props.updateNewPostText(text);
-    }
 return (
         <div>
             <div className={style.post}>
                 My posts
-                <div>
-                    <textarea onChange={onPostChange}
-                              value={props.profilePage.newPostText}>New Post</textarea>
-                    <button onClick={addPost}>Add post</button>
-                </div>
+                <AddPostForm onSubmit={addPost}/>
             </div>
             {postsElements}
         </div>

@@ -1,13 +1,11 @@
 import React from 'react';
 import style from "../Profile.module.css";
-import {ProfileType} from "../../../redux/profileReducer";
 import loader from '../../Users/loader.svg'
+import ProfileStatus from "./ProfileStatus";
+import {ProfilePropsType} from "../ProfileContainer";
 
-type PropsType = {
-    profile: ProfileType
-}
 
-const ProfileInfo = (props: PropsType) => {
+const ProfileInfo = (props: ProfilePropsType) => {
 
     if (!props.profile.photos) {
         return <img src={loader} alt={''}/>
@@ -23,6 +21,7 @@ const ProfileInfo = (props: PropsType) => {
             <div>
                 Name: {props.profile.fullName}
             </div>
+            <ProfileStatus {...props} />
         </div>
     );
 };

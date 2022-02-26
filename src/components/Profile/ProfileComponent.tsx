@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import Profile from "./Profile";
-import axios from "axios";
-import {ProfilePropsType} from "./ProfileInfo/ProfileContainer";
+import {ProfilePropsType} from "./ProfileContainer";
 import {useParams} from "react-router-dom";
-import {getProfile} from "../../redux/api/api";
-import {setUserProfileTC} from "../../redux/profileReducer";
+import {getStatus} from "../../redux/api/api";
+
+
 
 
 function ProfileComponent(props: ProfilePropsType) {
@@ -13,13 +13,15 @@ function ProfileComponent(props: ProfilePropsType) {
     const userId = params.id
 
     useEffect(() => {
-        debugger
-        props.setProfile(userId as string)
-        
+        console.log('render')
+        if (userId) {
+            props.setProfile(userId)
+            props.getStatus(userId)
+        }
     },[setProfile, userId])
 
         return (
-            <Profile {...props}/>
+            <Profile {...props} />
         );
 
 }

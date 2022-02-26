@@ -63,6 +63,7 @@ export const toggleIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE-IS-FE
 export const getUsersTC = (currentPage: number,pageSize: number ) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetchingAC(true))
+        dispatch(setCountPageAC(currentPage))
         getUsers(currentPage, pageSize).then(data => {
             dispatch(setUsersAC(data.items))
             dispatch(setTotalCountAC(data.totalCount))
