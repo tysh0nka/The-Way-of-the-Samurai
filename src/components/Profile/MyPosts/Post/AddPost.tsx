@@ -13,7 +13,7 @@ function AddPost() {
 
     return (
         <div style={{width: '700px'}}>
-            <textarea style={{resize: 'none', width: '600px', height: '30px', borderRadius: '4px'}}
+            <textarea style={{resize: 'none', width: '500px', height: '30px', borderRadius: '4px'}}
                       placeholder={'New post'}
                       value={post}
                       onChange={changePost}> </textarea>

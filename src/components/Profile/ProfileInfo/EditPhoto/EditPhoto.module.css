@@ -1,0 +1,14 @@
+
+.editPhoto {
+    text-align: center;
+    border: gray solid 1px;
+}
+
+.editPhoto input {
+    outline:0;
+    opacity:0;
+    pointer-events:none;
+    user-select:none;
+    width: 20px;
+}
+

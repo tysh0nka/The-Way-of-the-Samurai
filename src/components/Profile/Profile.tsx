@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import '../../App.css';
+import s from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import Subscriptions from "./Subscriptions/Subscriptions";
 import {useParams} from "react-router-dom";
@@ -23,7 +24,7 @@ function Profile() {
     }, [userId])
 
     return (
-        <div className={'content'}>
+        <div className={`content ${s.profile}`}>
             <ProfileInfo/>
             {myId === +userId && <Subscriptions/>}
             <MyPosts/>

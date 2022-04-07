@@ -1,9 +1,8 @@
 .postBlock {
-    margin-top: 20px;
-    margin-left: 277px;
-    width: 680px;
+    margin-top: -5px;
+    margin-left: 235px;
+    width: 722px;
     background-color: whitesmoke;
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
 
 .myPost {
@@ -11,7 +10,7 @@
 }
 
 .post {
-    width: 800px;
+    width: 600px;
     margin-left: 10px;
 }
 
@@ -22,6 +21,9 @@
 }
 .post textarea {
     margin-top: 40px;
+    margin-left: 50px;
+
+
 }
 
 .posts {

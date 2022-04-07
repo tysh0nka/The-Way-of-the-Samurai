@@ -1,4 +1,9 @@
 
+
+.profile {
+    position: relative;
+}
+
 .profileInfo {
     display: flex;
     padding-top: 30px;
@@ -10,7 +15,6 @@
     flex-direction: column;
     padding: 20px 20px;
     background-color: whitesmoke;
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
 .photo button {
     width: 156px;
@@ -23,10 +27,8 @@
 .info {
     padding-top: 20px;
     padding-left: 20px;
-    margin-left: 40px;
     height: 196px;
-    width: 660px;
+    width: 700px;
     background-color: whitesmoke;
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
 

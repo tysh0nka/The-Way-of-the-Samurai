@@ -1,13 +1,12 @@
 .subBlock {
     position: absolute;
-    left: 240px;
+    left: 40px;
     width: 196px;
     height: 270px;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
 
 .title {
