@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/The-Way-of-the-Samurai/static/css/main.5e213629.chunk.css",
+    "main.js": "/The-Way-of-the-Samurai/static/js/main.6e1c9616.chunk.js",
+    "main.js.map": "/The-Way-of-the-Samurai/static/js/main.6e1c9616.chunk.js.map",
+    "runtime-main.js": "/The-Way-of-the-Samurai/static/js/runtime-main.4615104c.js",
+    "runtime-main.js.map": "/The-Way-of-the-Samurai/static/js/runtime-main.4615104c.js.map",
+    "static/js/2.a85d0075.chunk.js": "/The-Way-of-the-Samurai/static/js/2.a85d0075.chunk.js",
+    "static/js/2.a85d0075.chunk.js.map": "/The-Way-of-the-Samurai/static/js/2.a85d0075.chunk.js.map",
+    "static/js/3.67e32f1a.chunk.js": "/The-Way-of-the-Samurai/static/js/3.67e32f1a.chunk.js",
+    "static/js/3.67e32f1a.chunk.js.map": "/The-Way-of-the-Samurai/static/js/3.67e32f1a.chunk.js.map",
+    "index.html": "/The-Way-of-the-Samurai/index.html",
+    "static/css/main.5e213629.chunk.css.map": "/The-Way-of-the-Samurai/static/css/main.5e213629.chunk.css.map",
+    "static/js/2.a85d0075.chunk.js.LICENSE.txt": "/The-Way-of-the-Samurai/static/js/2.a85d0075.chunk.js.LICENSE.txt",
+    "static/media/loader.535014e2.svg": "/The-Way-of-the-Samurai/static/media/loader.535014e2.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4615104c.js",
+    "static/js/2.a85d0075.chunk.js",
+    "static/css/main.5e213629.chunk.css",
+    "static/js/main.6e1c9616.chunk.js"
+  ]
+}
