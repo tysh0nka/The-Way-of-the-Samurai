@@ -2,26 +2,33 @@ import React from 'react';
 import style from "../Profile.module.css";
 import loader from '../../Users/loader.svg'
 import ProfileStatus from "./ProfileStatus";
-import {ProfilePropsType} from "../ProfileContainer";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/store";
+import {ProfileType} from "../../../redux/profileReducer";
 
 
-const ProfileInfo = (props: ProfilePropsType) => {
+const ProfileInfo = () => {
 
-    if (!props.profile.photos) {
+    const profile = useSelector<AppStateType, ProfileType>(state => state.profilePage.profile)
+    let photo;
+
+    if (!profile.photos) {
         return <img src={loader} alt={''}/>
+    } else {
+        photo = profile.photos.large
     }
+
     return (
-        <div>
-            <div>
-                <img className={style.imgContent1} src={'https://sun9-32.userapi.com/c855736/v855736078/166f5e/x6s5z_vYADM.jpg'} alt={''}/>
+        <div className={style.profileInfo}>
+            <div className={style.photo}>
+                <img className={style.imgContent2}
+                     src={photo ? photo : 'https://i.vimeocdn.com/portrait/39345265_640x640'} alt={''}/>
+                <button className={style.editPhoto}>Edit Photo</button>
             </div>
-            <div>
-                <img className={style.imgContent2} src={props.profile.photos.large && 'https://i.vimeocdn.com/portrait/39345265_640x640'} alt={''}/>
+            <div className={style.info}>
+                Name: {profile.fullName}
+                <ProfileStatus/>
             </div>
-            <div>
-                Name: {props.profile.fullName}
-            </div>
-            <ProfileStatus {...props} />
         </div>
     );
 };

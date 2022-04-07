@@ -2,30 +2,27 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPropsType} from "./DialogsContainer";
-import {Navigate} from "react-router-dom";
-import {AddMessage, AddMessageFormType} from "./AddMessageForm";
+import {useNavigate} from "react-router-dom";
+import AddMessage from "./AddMessage";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
+import {DialogType, MessageType} from "../../redux/dialogsReducer";
 
 
-function Dialogs (props : DialogsPropsType) {
+function Dialogs() {
 
-    const dialogElements = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-    const messagesElements = props.dialogsPage.messages.map( m => <Message id={m.id} message={m.message} />)
+    const navigate = useNavigate()
 
-    // const newMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     const text = e.currentTarget.value;
-    //     props.newMessageText(text)
-    // }
+    const dialogElements = useSelector<AppStateType, Array<DialogType>>(state => state.dialogsPage.dialogs)
+        .map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    const messagesElements = useSelector<AppStateType, Array<MessageType>>(state => state.dialogsPage.messages)
+        .map(m => <Message id={m.id} message={m.message}/>)
+    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
-
-    const addNewMessage = (value: AddMessageFormType) => {
-        alert(value.addMessage)
-        props.sendMessage(value.addMessage)
+    if (!isAuth) {
+        navigate('/login')
     }
 
-    if (!props.isAuth) {
-        return <Navigate to={'/login'}/>
-    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -34,7 +31,7 @@ function Dialogs (props : DialogsPropsType) {
             <div className={s.messages}>
                 {messagesElements}
             </div>
-            <AddMessage onSubmit={addNewMessage}/>
+            <AddMessage/>
 
         </div>
     );

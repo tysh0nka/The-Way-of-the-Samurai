@@ -1,24 +1,28 @@
-import React, {ChangeEvent} from 'react';
-import style from './MyPosts.module.css'
+import React from 'react';
+import sMyPost from './MyPosts.module.css'
+import sProfile from './../Profile.module.css'
 import Posts from "./Post/Posts";
-import {MyPostPropsType} from "./MyPostsContainer";
-import {AddPostForm, AddPostFormType} from "./Post/AddPost";
+import AddPost from "./Post/AddPost";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/store";
+import {PostType} from "../../../redux/profileReducer";
 
-function MyPosts (props: MyPostPropsType) {
-    const postsElements = props.profilePage.posts.map( p => <Posts message={p.message} id={p.id} likesCount={p.likesCount}/>)
+function MyPosts() {
 
-    const addPost = (values: AddPostFormType) => {
-        console.log(values)
-        props.addPost(values.addPostForm)
-    }
+    const postsElements = useSelector<AppStateType, PostType[]>(state => state.profilePage.posts)
+        .map(post => <Posts message={post.message} id={post.id} key={post.id} likesCount={post.likesCount}/> )
 
-return (
-        <div>
-            <div className={style.post}>
-                My posts
-                <AddPostForm onSubmit={addPost}/>
+    return (
+        <div className={`${sMyPost.postBlock} ${sProfile.postBlock}`}>
+            <div className={sMyPost.post}>
+                <div className={sMyPost.title}>
+                    <span className={sMyPost.myPost}>My Post</span>
+                </div>
+                <AddPost/>
             </div>
-            {postsElements}
+            <div className={sMyPost.posts}>
+                {postsElements}
+            </div>
         </div>
     );
 }

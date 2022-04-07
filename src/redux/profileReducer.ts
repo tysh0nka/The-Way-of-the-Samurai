@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {changeStatus, getProfile, getStatus} from "./api/api";
-import {AxiosResponse} from "axios";
 
 export type ProfileType = {
     "aboutMe": null| string,

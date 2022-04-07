@@ -1,17 +1,16 @@
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 import {
-    followAC, followUsersTC, getUsersTC,
+    followAC,
+    followUsersTC,
+    getUsersTC,
     setCountPageAC,
-    setTotalCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unFollowAC, UnfollowUsersTC,
+    unFollowAC,
+    UnfollowUsersTC,
     UsersType
 } from "../../redux/usersReducer";
 import UsersC from "./UsersApiComponent";
-
 
 
 type MapStateToPropsType = {

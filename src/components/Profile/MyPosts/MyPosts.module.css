@@ -1,4 +1,30 @@
-.post {
-    text-align: center;
-    width: 300px;
+.postBlock {
+    margin-top: 20px;
+    margin-left: 277px;
+    width: 680px;
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
+
+.myPost {
+
+}
+
+.post {
+    width: 800px;
+    margin-left: 10px;
+}
+
+.title {
+    padding-top: 15px;
+    text-align: center;
+    width: 660px;
+}
+.post textarea {
+    margin-top: 40px;
+}
+
+.posts {
+}
+
+

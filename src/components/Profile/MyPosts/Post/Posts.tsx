@@ -3,16 +3,15 @@ import style from './Posts.module.css'
 import {PostType} from "../../../../redux/profileReducer";
 
 
+function Posts({message}: PostType) {
 
-function Posts (props: PostType)  {
     return (
-        <div>
-            <div>
-                <img className={style.imgPost} src={'https://vraki.net/sites/default/files/inline/images/1_42.jpg'} alt={''}/>
-                {props.message}
+        <div className={style.postBlock}>
+            <div className={style.imgPost}>
+                <img src={'https://i.vimeocdn.com/portrait/39345265_640x640'} alt={''}/>
             </div>
-            <div>
-                <span>Likes {props.likesCount}</span>
+            <div className={style.message}>
+                <p>{message}</p>
             </div>
         </div>
     );

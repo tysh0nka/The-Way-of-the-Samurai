@@ -1,22 +1,28 @@
-import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, requiredField} from "../../../../utils/validators/validators";
+import React, {useState} from 'react';
+import {useDispatch} from "react-redux";
+import {AddActionCreate} from "../../../../redux/profileReducer";
 
-export type AddPostFormType = {
-    addPostForm: string
-}
 
-const maxLength = maxLengthCreator(10)
+function AddPost() {
 
-function AddPost(props: InjectedFormProps<AddPostFormType>) {
+    const [post, setPost] = useState('')
+    const dispatch = useDispatch()
+
+    const changePost = (e: React.ChangeEvent<HTMLTextAreaElement>) => setPost(e.currentTarget.value)
+    const addPost = () => dispatch(AddActionCreate(post))
+
     return (
-        <form onSubmit={props.handleSubmit}>
-                    <Field component={'textarea'} name={'addPostForm'} validate={[requiredField, maxLength]} placeholder={'New post'}> </Field>
-                <button >Add post</button>
-        </form>
+        <div style={{width: '700px'}}>
+            <textarea style={{resize: 'none', width: '600px', height: '30px', borderRadius: '4px'}}
+                      placeholder={'New post'}
+                      value={post}
+                      onChange={changePost}> </textarea>
+            <button
+                style={{width: '60px', position: 'absolute', marginTop: '40px', height: '35px', borderRadius: '4px'}}
+                onClick={addPost}>Add post
+            </button>
+        </div>
     );
 }
 
-export const AddPostForm = reduxForm<AddPostFormType>({
-    form: 'AddPost'
-})(AddPost)
+export default AddPost

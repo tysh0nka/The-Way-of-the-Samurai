@@ -1,10 +1,22 @@
 .nav {
+    margin-top: 70px;
     grid-area: nav;
-    background-color: aquamarine;
+}
+
+.navBlock {
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 35px;
+}
+
+.navBlock div {
+    margin-bottom: 4px;
 }
 
 .nav a {
     text-decoration: none;
+    font-size: 18px;
+    color: #29579b;
 }
 
 

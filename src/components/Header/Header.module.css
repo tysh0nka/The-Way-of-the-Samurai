@@ -1,7 +1,44 @@
 .header {
-    grid-area: header;
-    background-color: beige;
+    position: fixed;
+    background-color: whitesmoke;
+    height: 60px;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
+
+.headerContainer {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 60px;
+}
+
 .header img {
-    width: 90px;
+    position: absolute;
+    left: 0;
+    margin-top: 13px;
+    width: 30px;
+}
+
+.loginBlock {
+    position: absolute;
+    left: 35px;
+    top: 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.logout {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.logout button {
+    padding: 4px;
+    background-color: whitesmoke;
+    border-radius: 2px;
+    box-shadow: 0px 0px 6px -2px rgb(34 60 80 / 39%);
 }

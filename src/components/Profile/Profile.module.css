@@ -1,13 +1,32 @@
 
-.content {
-    grid-area: profile;
-    background-color: aqua;
+.profileInfo {
+    display: flex;
+    padding-top: 30px;
+    margin-left: 40px;
 }
-.imgContent1 {
-    width: 100%;
+
+.photo {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
+}
+.photo button {
+    width: 156px;
 }
 
 .imgContent2 {
-    width: 256px;
+    width: 156px;
+}
+
+.info {
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-left: 40px;
+    height: 196px;
+    width: 660px;
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.39);
 }
 

@@ -1,33 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import EditableSpan from "../../../commons/EditableSpan/EditableSpan";
-import {changeStatus, getStatus} from "../../../redux/api/api";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/reduxStore";
-import {changeStatusTC, ProfileType} from "../../../redux/profileReducer";
-import {ProfilePropsType} from "../ProfileContainer";
+import {AppStateType} from "../../../redux/store";
+import {changeStatusTC} from "../../../redux/profileReducer";
+import style from './../Profile.module.css'
+import {useParams} from "react-router-dom";
 
+function ProfileStatus() {
 
+    const myId = useSelector<AppStateType, number | null>(state => state.auth.id)
 
-function ProfileStatus(props: ProfilePropsType ) {
-
-    const myId = useSelector<AppStateType, number| null>(state => state.auth.id)
-    const userId = props.profile.userId
+    const params = useParams()
+    const userId = params.id
+    const status = useSelector<AppStateType, string>(state => state.profilePage.status)
     const dispatch = useDispatch()
 
     const removeTaskStatus = (title: string) => {
         dispatch(changeStatusTC(title))
     }
 
-    if(+userId !== myId) {
+    // @ts-ignore
+    if (+userId !== myId) {
         return (
-            <span>{props.status}</span>
+            <div className={style.status}>
+                <span>{status}</span>
+            </div>
         )
+    } else {
+        return (
+            <div className={style.status}>
+                <EditableSpan value={status} onChange={removeTaskStatus}/>
+            </div>
+        );
     }
-    return (
-        <>
-            <EditableSpan value={props.status} onChange={removeTaskStatus}/>
-        </>
-    );
 }
 
 export default ProfileStatus;

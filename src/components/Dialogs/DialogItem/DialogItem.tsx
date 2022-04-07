@@ -4,8 +4,6 @@ import s from "./../Dialogs.module.css";
 import {DialogType} from "../../../redux/dialogsReducer";
 
 
-
-
 function DialogItem (props: DialogType) {
     return (
         <div className={s.dialogsItems}>

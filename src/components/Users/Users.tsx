@@ -15,6 +15,7 @@ type PropsType = {
 }
 
 function Users(props: PropsType) {
+
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pageCount && i < 10; i++) {
@@ -33,7 +34,7 @@ function Users(props: PropsType) {
                 )}
             </div>
             {props.users.map(m =>
-            <div key={m.id}>
+                <div key={m.id}>
                     <span>
                         <NavLink to={`/profile/${m.id}`}>
                             <div>
@@ -47,7 +48,7 @@ function Users(props: PropsType) {
                                props.unFollow(m.id)
 
                            }}>Unfollow</button> : <button disabled={disabled === m.id} onClick={() => {
-                              props.follow(m.id)
+                               props.follow(m.id)
                            }}>Follow</button>}
                         </div>
                     </span>

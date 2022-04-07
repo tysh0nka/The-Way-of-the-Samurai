@@ -27,6 +27,7 @@
 .message {
 
 }
+
 .newMessage {
     grid-area: newMessage;
     margin: 0 20px;

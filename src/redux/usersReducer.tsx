@@ -1,4 +1,4 @@
-import {followUsers, getUsers, UnfollowUsers} from "./api/api";
+import {followUsers, getFriends, getUsers, UnfollowUsers} from "./api/api";
 import {Dispatch} from "redux";
 
 export type UsersType = {
@@ -12,12 +12,15 @@ export type UsersType = {
     "followed": boolean
 }
 
+
+
 const initialState = {
     users: [] as Array<UsersType>,
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    friends: [] as Array<UsersType>,
 }
 type InitialStateType = typeof initialState
 
@@ -30,6 +33,9 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, users: state.users.map(m => m.id === action.userID ? {...m, followed: false} : m)}
         case 'USERS':
             return {...state, users: [...action.users]}
+        case "FRIENDS": {
+            return {...state, friends: [...action.friends]}
+        }
         case "SET-COUNT-PAGE":
             return {...state, currentPage: action.value}
         case  "SET-TOTAL-COUNT":
@@ -47,8 +53,16 @@ export type setUsersACType = ReturnType<typeof setUsersAC>
 export type setCountPageACType = ReturnType<typeof setCountPageAC>
 export type setTotalCountACType = ReturnType<typeof setTotalCountAC>
 export type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+export type getFriendsACType = ReturnType<typeof getFriendsAC>
 
-export type ActionsType = followACType|unFollowACType|setUsersACType| setCountPageACType | setTotalCountACType | toggleIsFetchingACType
+export type ActionsType =
+    followACType
+    |unFollowACType
+    |setUsersACType
+    | setCountPageACType
+    | setTotalCountACType
+    | toggleIsFetchingACType
+    | getFriendsACType
 
 
 
@@ -58,7 +72,7 @@ export const setUsersAC = (users: Array<UsersType>) => ({type: "USERS", users} a
 export const setCountPageAC = (value: number) => ({type: "SET-COUNT-PAGE", value} as const)
 export const setTotalCountAC = (totalCount: number) => ({type: "SET-TOTAL-COUNT", totalCount} as const)
 export const toggleIsFetchingAC = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
-
+export const getFriendsAC = (friends: Array<UsersType>) => ({type: "FRIENDS", friends} as const)
 
 export const getUsersTC = (currentPage: number,pageSize: number ) => {
     return (dispatch: Dispatch) => {
@@ -72,6 +86,14 @@ export const getUsersTC = (currentPage: number,pageSize: number ) => {
         })
     }
 }
+
+export const getFriendsTC = () => (dispatch: Dispatch) => {
+    getFriends().then(data => {
+        dispatch(getFriendsAC(data.items))
+    })
+}
+
+
 export const UnfollowUsersTC = (id: number) => {
     return (dispatch: Dispatch) => {
         UnfollowUsers(id).then(data => {
@@ -84,7 +106,6 @@ export const UnfollowUsersTC = (id: number) => {
 }
 
 export const followUsersTC = (id: number) => {
-    debugger
 return (dispatch: Dispatch) => {
     followUsers(id).then(data => {
         if (data.resultCode === 0) {
